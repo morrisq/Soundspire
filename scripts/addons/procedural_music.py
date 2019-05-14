@@ -36,16 +36,21 @@ if modules not in sys.path:
 if scripts not in sys.path:
     sys.path.insert(0, scripts)
 
-#import music_data
-from music_data import getVertices
+'''import importlib
+if sys.modules['music_data']:
+    importlib.reload(music_data)'''
+#from music_data import getVertices
+import music_data
+import importlib
+importlib.reload(music_data)
 
-test_num = 1
+test_num = 2
 
 def add_object(self, context):
     scale_x = self.scale.x
     scale_y = self.scale.y
     
-    bytes = getVertices("sample1.mid")
+    bytes = music_data.getVertices("sample1.mid")
     verts = []
     '''verts = [
             Vector((-1 * scale_x, 1 * scale_y, 0)),
@@ -55,12 +60,11 @@ def add_object(self, context):
             ]
     '''
     for byte in bytes:
-	    verts.append(Vector((byte[0] * scale_x, byte[1] * scale_y, byte[2])))
+        verts.append(Vector((byte[0] * scale_x, byte[1] * scale_y, byte[2])))
     edges = []
     faces = []
-    #faces = [[0, 1, 2, 3]]
 
-    mesh = bpy.data.meshes.new(name="New Test Mesh" + str(test_num))
+    mesh = bpy.data.meshes.new(name="New Test Mesh " + str(test_num))
     mesh.from_pydata(verts, edges, faces)
     # useful for development when the mesh may be invalid.
     #mesh.validate(verbose=True)
