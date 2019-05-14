@@ -9,7 +9,6 @@ if modules not in sys.path:
 if scripts not in sys.path:
     sys.path.insert(0, scripts)
 
-import os
 import mido
 from mido import MidiFile
 

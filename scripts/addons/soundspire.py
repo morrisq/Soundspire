@@ -17,7 +17,8 @@ This will call on dependencies that WILL depend on the system python
 The dependencies will use the system python to create specifically generated output in the form of 
 a text file full of vertices, edges and faces, etc...
 
-So essentially, a text file will be the middleman'''
+So essentially, a text file will be the middleman
+'''
 
 import bpy
 from bpy.types import Operator
@@ -28,6 +29,8 @@ from mathutils import Vector
 import sys
 import os
 
+#This takes the current directory the blender file is in and
+#makes sure the system path has access to the music file data.
 blend_dir = os.path.dirname(bpy.data.filepath)
 modules = os.path.join(blend_dir, "scripts\\modules")
 scripts = os.path.join(blend_dir, "scripts\\addons")
@@ -36,14 +39,13 @@ if modules not in sys.path:
 if scripts not in sys.path:
     sys.path.insert(0, scripts)
 
-'''import importlib
-if sys.modules['music_data']:
-    importlib.reload(music_data)'''
-#from music_data import getVertices
+#music_data is a custom module referencing all the functions in the music_data.py file
+#importlib reloads the import so you can edit music_data or any other custom module
 import music_data
 import importlib
 importlib.reload(music_data)
 
+#This is just to differentiate between versions of the module.
 test_num = 2
 
 def add_object(self, context):
@@ -52,13 +54,6 @@ def add_object(self, context):
     
     bytes = music_data.getVertices("sample1.mid")
     verts = []
-    '''verts = [
-            Vector((-1 * scale_x, 1 * scale_y, 0)),
-            Vector((1 * scale_x, 1 * scale_y, 0)),
-            Vector((1 * scale_x, -1 * scale_y, 0)),
-            Vector((-1 * scale_x, -1 * scale_y, 0)),
-            ]
-    '''
     for byte in bytes:
         verts.append(Vector((byte[0] * scale_x, byte[1] * scale_y, byte[2])))
     edges = []
@@ -92,7 +87,7 @@ class OBJECT_OT_add_object(Operator, AddObjectHelper):
 def add_object_button(self, context):
     self.layout.operator(
         OBJECT_OT_add_object.bl_idname,
-        text="Test " + str(test_num),
+        text="Soundspire " + str(test_num),
         icon='VIEW3D')
 
 
