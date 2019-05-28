@@ -8,7 +8,7 @@ Part 1: Install MuseScore
     - Musescore is free to download and install on your computer.
     - Looking at musescore for the first time might be intimidating, but for our purposes, 
       we'll be making something simple
-    - [TO DO: Will make tutorial with a simple exercise and finish the MuseScore part of this guide]
+    - https://youtu.be/xzgx34wspjk
 
 Part 2: Install Blender
     - Blender is a game engine, 3D modelling software and renderer. An all-in-one package essentially!
